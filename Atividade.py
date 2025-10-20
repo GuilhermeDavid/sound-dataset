@@ -1,7 +1,6 @@
 # ---------------------------------------------------------------
 # CLASSIFICAÇÃO DE ÁUDIOS - MUSICAL INSTRUMENT'S SOUND DATASET
 # ---------------------------------------------------------------
-# Autor: Guilherme David
 # Objetivo: Classificar os sons de instrumentos (Guitarra, Bateria, Violino, Piano)
 # Usando Transfer Learning com YAMNet e TensorFlow
 # ---------------------------------------------------------------
@@ -138,7 +137,7 @@ model.summary()
 # ---------------------------------------------------------------
 # 8. TREINAMENTO
 # ---------------------------------------------------------------
-EPOCHS = 10
+EPOCHS = 50
 history = model.fit(
     X_train_emb, y_train,
     validation_data=(X_val_emb, y_val),
