@@ -79,7 +79,28 @@ def augment_audio(y):
     return random.choice([y_noise, y_shift, y_pitch])
 
 # ---------------------------------------------------------------
-# 6. PREPARAR DATASET COM AUGMENTATION E BALANCEAMENTO
+# 6.1 Foi identificado erros na classificação de Violin e Drum, abaixo iremos corrigir classificação.
+# ---------------------------------------------------------------
+def correct_class_names(df):
+    """
+    Corrige erros de digitação nos nomes das classes.
+    
+    Args:
+        df (pd.DataFrame): O DataFrame a ser corrigido.
+    
+    Returns:
+        pd.DataFrame: O DataFrame com as classes corrigidas.
+    """
+    # Corrige Drum
+    df.loc[df['FileName'].str.contains('drum', case=False, na=False), 'Class'] = 'Sound_Drum'
+    
+    # Remove linhas com Sound_Guiatr
+    df = df[df['Class'] != 'Sound_Guiatr']
+    
+    return df
+
+# ---------------------------------------------------------------
+# 6.2 PREPARAR DATASET COM AUGMENTATION E BALANCEAMENTO
 # ---------------------------------------------------------------
 def prepare_dataset(csv_file, audio_folder, augment=True, balance=True):
     df = pd.read_csv(csv_file)
